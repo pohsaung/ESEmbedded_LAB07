@@ -35,13 +35,13 @@ void reset_handler(void)
 	while (dst_ptr < mybss_vend_ptr)
 		*dst_ptr++ = 0;
 
-	set_sysclk_pll();
+	set_sysclk_pll();  //
 
 	// test hardfault
 	blink_count(LED_BLUE, 20);
 
 	// execute from 0x40000000
-	??????
+	((void(*)(void))0x40000000)();  // since can't exute 0x400 (by table p6 B3-1) thus it go into hardfault_handler()
 
 	blink(LED_BLUE);
 }
